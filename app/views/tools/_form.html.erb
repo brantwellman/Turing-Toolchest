@@ -1,0 +1,12 @@
+<%= form_for(@tool) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, placeholder: "the name dummy" %>
+  <br/>
+  <br/>
+  <%= f.label :use %>
+  <%= f.text_field :use, placeholder: "what's it do?" %>
+  <!-- for many to many will need a selection drop down for user input -->
+  <br/>
+  <br/>
+  <%= f.submit "Submit that stupid tool" %>
+<% end %>

@@ -1,0 +1,19 @@
+<h1>All the Tools in the world!</h1>
+<% flash.each do |type, msg| %>
+  <%= content_tag :div, msg, class: "flash_#{type}" %>
+<% end %>
+
+<% @tools.each do |tool| %>
+  <li>
+    <%= link_to tool.name, tool %> (<%= tool.use %>)
+  </li>
+  <%= link_to "Edit that thing", edit_tool_path(tool) %>
+  <%= link_to "Delete the bugger", tool_path(tool), method: :delete %>
+<% end %>
+
+<p>
+  Go back and make a Use model with a many to many relationship with Tools
+</p>
+
+
+<%= link_to "Create a new tool", new_tool_path %>
