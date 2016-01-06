@@ -2,7 +2,8 @@ class ToolsController < ApplicationController
   before_action :set_tool, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tools = Tool.all
+    @user = User.find(params[:user_id])
+    @tools = @user.tools
     session[:most_recent_tool_id] = Tool.last.id
   end
 
@@ -10,17 +11,20 @@ class ToolsController < ApplicationController
   end
 
   def new
+    @user = User.find(params[:user_id])
     @tool = Tool.new
   end
 
   def create
-    @tool = Tool.new(tool_params)
+    @user = User.find(params[:user_id])
+    @tool = @user.tools.new(tool_params)
     if @tool.save
       flash[:notice] = "You have made a tool!"
+      redirect_to user_tools_path
     else
       flash[:error] = @tool.errors.full_messages.join(", ")
+      render :new
     end
-      redirect_to tools_path
   end
 
   def edit
@@ -33,7 +37,7 @@ class ToolsController < ApplicationController
 
   def destroy
     @tool.destroy
-    redirect_to tools_path
+    redirect_to user_tools_path
   end
 
   private
@@ -43,7 +47,7 @@ class ToolsController < ApplicationController
   end
 
   def tool_params
-   params.require(:tool).permit(:name, :use)
+   params.require(:tool).permit(:name, :use, :user_id)
   end
 
   # don't write tests for private methods

@@ -5,10 +5,10 @@
 
 <% @tools.each do |tool| %>
   <li>
-    <%= link_to tool.name, tool %> (<%= tool.use %>)
+    <%= link_to tool.name, user_tool_path(tool) %> (<%= tool.use %>)
   </li>
-  <%= link_to "Edit that thing", edit_tool_path(tool) %>
-  <%= link_to "Delete the bugger", tool_path(tool), method: :delete %>
+  <%= link_to "Edit that thing", edit_user_tool_path(tool) %>
+  <%= link_to "Delete the bugger", user_tool_path(tool), method: :delete %>
 <% end %>
 
 <p>
@@ -16,4 +16,4 @@
 </p>
 
 
-<%= link_to "Create a new tool", new_tool_path %>
+<%= link_to "Create a new tool", new_user_tool_path %>
